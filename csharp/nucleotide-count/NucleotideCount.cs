@@ -7,7 +7,8 @@ public class NucleotideCount
 
     //string variable to hold the 'strand'
     private string sequence;
-    //dictionary of integers with char keys, it'll hold the possibles nucleotides.
+    //dictionary of integers with char keys, 
+    //it'll hold the possibles nucleotides and its quantities.
     private IDictionary<char, int> nucleotides;
 
     public NucleotideCount(string sequence)
