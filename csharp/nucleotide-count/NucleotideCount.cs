@@ -7,20 +7,40 @@ public class NucleotideCount
 
     //string variable to hold the 'strand'
     private string sequence;
-    //dictionary of integers with char keys, 
-    //it'll hold the possibles nucleotides and its quantities.
+    //dictionary of integers with char keys, it'll hold the possibles nucleotides.
     private IDictionary<char, int> nucleotides;
 
-    public NucleotideCount(string sequence)
+    public NucleotideCount(string sequence2)
     {
-        this.sequence = sequence;
+        if (!string.IsNullOrWhiteSpace(sequence2))
+        {
+            for (int i = 0; i < sequence2.Length; i++)
+            {
+                //throws an 'InvalidNucleotideException' in case of
+                //the 'sequence2' has characters that are not valid nucleotides.
+                if (sequence2[i] == 'A' ||
+                    sequence2[i] == 'C' ||
+                    sequence2[i] == 'G' ||
+                    sequence2[i] == 'T')
+                {
+                    this.sequence = sequence2;
+                }
+                else
+                {
+                    throw new InvalidNucleotideException();
+                }
+            }
+        }
+        else
+        {
+            this.sequence = sequence2;
+        }
     }
 
     public IDictionary<char, int> NucleotideCounts
     { 
         get
         {
-
             if (nucleotides == null)
             {
                 nucleotides = new Dictionary<char, int>
@@ -38,12 +58,6 @@ public class NucleotideCount
                     {
                         nucleotides[key] += 1;
                         //or nucleotides[key]++;
-                    }
-                    
-                    //not working, why??
-                    if(!nucleotides.ContainsKey(key))
-                    {
-                        throw new InvalidNucleotideException();
                     }
                 }
             }
